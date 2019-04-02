@@ -18,7 +18,26 @@ def decode(digits, base):
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
     # TODO: Decode digits from binary (base 2)
-    # ...
+    powers_of_two = [1,2,4,8,16,32,64,128,256]
+    if base == 2:
+
+        # we reverse the digits so we can count powers_of_two from left to right.
+        reversed_digits = digits[::-1]
+
+        indexs_of_ones = list()
+
+        for index, value in enumerate(reversed_digits):
+            if value == "1":
+                indexs_of_ones.append(index)
+
+        nums_to_add = list()
+
+        for index, value in enumerate(powers_of_two):
+            for item in indexs_of_ones:
+                if index == item:
+                    nums_to_add.append(value)
+
+        return sum(nums_to_add)
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
