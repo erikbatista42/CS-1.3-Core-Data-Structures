@@ -17,32 +17,37 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
-    # TODO: Decode digits from binary (base 2)
-    powers_of_two = [1,2,4,8,16,32,64,128,256]
-    if base == 2:
 
-        # we reverse the digits so we can count powers_of_two from left to right.
-        reversed_digits = digits[::-1]
+    if base == 16:
+        hexadecimals = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
 
-        indexs_of_ones = list()
+        new_digits_list = list()
 
-        for index, value in enumerate(reversed_digits):
-            if value == "1":
-                indexs_of_ones.append(index)
+        # turns each letter to it's number (e.g. a to 10) and adds it to the new digits list
+        # ^ So we can be able to multiply with it
+        for index, value in enumerate(hexadecimals):
+            for digit in digits:
+                if digit == value:
+                    new_digits_list.append(index)
 
-        nums_to_add = list()
+        total = 0
+        new_digits_len = len(new_digits_list)
+        print(new_digits_len)
 
-        for index, value in enumerate(powers_of_two):
-            for item in indexs_of_ones:
-                if index == item:
-                    nums_to_add.append(value)
+        for digit in new_digits_list:
+            new_digits_len -= 1
+            total += int(digit) * (base**new_digits_len)
 
-        return sum(nums_to_add)
-    # TODO: Decode digits from hexadecimal (base 16)
-    # ...
-    # TODO: Decode digits from any base (2 up to 36)
-    # ...
+        return total
+    else:
+        num_of_digits = len(digits)
+        total = 0
 
+        for digit in digits:
+            num_of_digits -= 1
+            total += int(digit) * (base**num_of_digits)
+
+        return total
 
 def encode(number, base):
     """Encode given number in base 10 to digits in given base.
