@@ -85,6 +85,16 @@ def decode(digits, base):
 
 #     return s
 
+def encode(number, base):
+    if base == 16:
+        print("base 16...oh nah!")
+    else:
+        n = number
+        m = int()# Let m be the number, initially empty, that we are converting to. We'll be composing it right to left.
+        b = base
+
+        for i in n:
+
 
 if __name__ == "__main__":
     binary = decode("7E", 16)
