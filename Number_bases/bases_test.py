@@ -138,7 +138,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(1234, 8) == '2322'
         assert encode(1234, 10) == '1234'
         assert encode(1234, 16) == '4d2'
-        # assert encode(1234, 32) == '16i'
+        assert encode(1234, 32) == '16i'
 
     def test_encode_248975(self):
         assert encode(248975, 2) == '111100110010001111'
@@ -147,7 +147,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(248975, 10) == '248975'
         assert encode(248975, 16) == '3cc8f'
         assert encode(248975, 25) == 'fn90'
-        # assert encode(248975, 32) == '7j4f'
+        assert encode(248975, 32) == '7j4f'
         # assert encode(248975, 36) == '5c3z'
 
     def test_encode_into_10(self):
@@ -157,7 +157,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(10, 10) == '10'
         assert encode(16, 16) == '10'
         assert encode(25, 25) == '10'
-        # assert encode(32, 32) == '10'
+        assert encode(32, 32) == '10'
         # assert encode(36, 36) == '10'
 
     def test_encode_into_1010(self):
@@ -167,7 +167,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(1010, 10) == '1010'
         assert encode(4112, 16) == '1010'
         assert encode(15650, 25) == '1010'
-        # assert encode(32800, 32) == '1010'
+        assert encode(32800, 32) == '1010'
         # assert encode(46692, 36) == '1010'
 
     def test_encode_into_101101(self):
@@ -177,7 +177,7 @@ class BasesEncodeTest(unittest.TestCase):
         assert encode(101101, 10) == '101101'
         assert encode(1052929, 16) == '101101'
         assert encode(9781876, 25) == '101101'
-        # assert encode(33588225, 32) == '101101'
+        assert encode(33588225, 32) == '101101'
         # assert encode(60514129, 36) == '101101'
 
 
