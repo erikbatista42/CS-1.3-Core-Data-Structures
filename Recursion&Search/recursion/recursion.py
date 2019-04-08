@@ -13,22 +13,16 @@ def factorial(n):
 
 
 def factorial_iterative(n):
-    # TODO: implement the factorial function iteratively here
     if n is 0:
         return 1
 
-    list_of_nums = []
-    for i in range(n, 0, -1):
-        list_of_nums.append(i)
+    list_of_nums = list(range(n, 0, -1))
     
-    temp = 0
-    for index, value in enumerate(list_of_nums):
-        if index == 0:
-            temp += value
-        else:
-            temp *= value
+    result = 1
+    for value in list_of_nums:
+        result *= value
     
-    return temp
+    return result
 
 
 def factorial_recursive(n):
