@@ -34,17 +34,13 @@ def encode(number, base):
     assert number >= 0, 'number is negative: {}'.format(number)
 
     # base 16
-    hex_map = {10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f"}
+    base_16 = {10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f"}
 
     base_25 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: 10}
 
-    # base 32
-    # base_32 = {0: "a", 1: "b", 2: "c", 3: "d", 4: "e", 5: "f", 6: "g", 7: "h", 8: "i", 9: "j", 10: "k", 11: "l", 12: "m", 13: "n", 14: "o", 15: "p", 16: "q", 17: "r", 18: "s", 19: "t", 20: "u", 21: "v", 22: "w", 23: "x", 24: "y", 25: "z", 26: "2", 27: "3", 28: "4", 29: "5", 30: "6", 31: "7"}
-
     base_32 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: "p", 26: "q", 27: "r", 28: "s", 29: "t", 30: "u", 31: "v", 32: 10}
 
-
-    # base 36
+    base_36 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: "p", 26: "q", 27: "r", 28: "s", 29: "t", 30: "u", 31: "v", 32: "w", 33: "x", 34: "y", 35: "z", 36: 10}
 
 
     result_list = []
@@ -54,9 +50,9 @@ def encode(number, base):
         whole_num = number // base
         remainder = number % base
         if (base is 16):
-            for key in hex_map.keys():
+            for key in base_16.keys():
                 if key is remainder:
-                    remainder = hex_map.get(key)
+                    remainder = base_16.get(key)
         if (base is 25):
             for key in base_25.keys():
                 if key is remainder:
@@ -66,8 +62,11 @@ def encode(number, base):
                 if key is remainder:
                     # print(key)
                     remainder = base_32.get(key)
-        # if (base is 36):
-        #     for key in 
+        if (base is 36):
+            for key in base_36.keys():
+                if key is remainder:
+                    # print(key)
+                    remainder = base_36.get(key)
         result_list += [remainder]
         
         number = whole_num
@@ -110,6 +109,6 @@ def main():
 
 
 if __name__ == "__main__":
-    # main()
+    main()
     binary = encode(1, 32)
     print(binary)
