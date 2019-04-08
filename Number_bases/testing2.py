@@ -1,34 +1,37 @@
 import string
 
-def encode(digits, base):
+def decode(digits, base):
     if base == 16:
-        # hexadecimals = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-        hexadecimals = string.hexdigits
-        new_digits_list = list()
-        # new_digits = "".join(new_digits_list)
-
-        for index,value in enumerate(hexadecimals):
-            for digit in digits:
-                if digit == value:
-                    # print(index)
-                    new_digits_list.append(index)
-
-        # num_of_digits = len(digits)
+        lenOfNum = len(str(digits))
         total = 0
-        new_digits_len = len(new_digits_list)
-        # print(new_digits_len)
+        hexMap = {"a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15 }
+        numAsList = list(str(digits))
+        for num in numAsList:
+            # check if one of the digits is a char..if it is, the base is 16
+            for key in hexMap.keys():
+                if num is key:
+                    # set the digit to be it's decimal value from the map
+                    num = hexMap.get(key)
+            # subtract 1 from the number length
+            lenOfNum -= 1
+            # multiply each digit in the list by base^lenOfNum and add it to
+            # the running sum
+            total += int(num) * (base**lenOfNum)
+        return total
+    else:
+        num_of_digits = len(digits)
+        total = 0
 
-        for digit in new_digits_list:
-            # print(digit)
-            new_digits_len -= 1
-            total += int(digit) * (base**new_digits_len)
+        for digit in digits:
+            num_of_digits -= 1
+            total += int(digit) * (base**num_of_digits)
 
         return total
 
 if __name__ == "__main__":
     #10,11,12
     # bead
-    binary = encode("7e", 16)
+    binary = decode("a", 16)
     print(binary)
 
 

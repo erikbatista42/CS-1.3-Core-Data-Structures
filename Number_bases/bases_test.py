@@ -86,7 +86,6 @@ class BasesDecodeTest(unittest.TestCase):
 # class BasesEncodeTest(unittest.TestCase):
 
 #     def test_encode_binary(self):
-#         # assert encode(0, 2) == '0'  # Should '' be valid?
 #         assert encode(1, 2) == '1'
 #         assert encode(2, 2) == '10'
 #         assert encode(3, 2) == '11'
@@ -138,7 +137,7 @@ class BasesDecodeTest(unittest.TestCase):
 #         assert encode(1234, 5) == '14414'
 #         assert encode(1234, 8) == '2322'
 #         assert encode(1234, 10) == '1234'
-#         # assert encode(1234, 16) == '4d2'
+#         assert encode(1234, 16) == '4d2'
 #         assert encode(1234, 32) == '16i'
 
 #     def test_encode_248975(self):
@@ -146,7 +145,7 @@ class BasesDecodeTest(unittest.TestCase):
 #         assert encode(248975, 4) == '330302033'
 #         assert encode(248975, 8) == '746217'
 #         assert encode(248975, 10) == '248975'
-#         # assert encode(248975, 16) == '3cc8f'
+#         assert encode(248975, 16) == '3cc8f'
 #         assert encode(248975, 25) == 'fn90'
 #         assert encode(248975, 32) == '7j4f'
 #         assert encode(248975, 36) == '5c3z'
@@ -156,7 +155,7 @@ class BasesDecodeTest(unittest.TestCase):
 #         assert encode(4, 4) == '10'
 #         assert encode(8, 8) == '10'
 #         assert encode(10, 10) == '10'
-#         # assert encode(16, 16) == '10'
+#         assert encode(16, 16) == '10'
 #         assert encode(25, 25) == '10'
 #         assert encode(32, 32) == '10'
 #         assert encode(36, 36) == '10'
@@ -166,7 +165,7 @@ class BasesDecodeTest(unittest.TestCase):
 #         assert encode(68, 4) == '1010'
 #         assert encode(520, 8) == '1010'
 #         assert encode(1010, 10) == '1010'
-#         # assert encode(4112, 16) == '1010'
+#         assert encode(4112, 16) == '1010'
 #         assert encode(15650, 25) == '1010'
 #         assert encode(32800, 32) == '1010'
 #         assert encode(46692, 36) == '1010'
@@ -176,7 +175,7 @@ class BasesDecodeTest(unittest.TestCase):
 #         assert encode(1105, 4) == '101101'
 #         assert encode(33345, 8) == '101101'
 #         assert encode(101101, 10) == '101101'
-#         # assert encode(1052929, 16) == '101101'
+#         assert encode(1052929, 16) == '101101'
 #         assert encode(9781876, 25) == '101101'
 #         assert encode(33588225, 32) == '101101'
 #         assert encode(60514129, 36) == '101101'
