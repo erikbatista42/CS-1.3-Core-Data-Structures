@@ -10,16 +10,16 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, "base is out of range: {}".format(base)
-    lenOfNum = len(str(digits))
+    len_of_num = len(str(digits))
     total = 0
-    hexMap = {"a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15}
-    numAsList = list(str(digits))
-    for num in numAsList:
-        for key in hexMap.keys():
+    hex_map = {"a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15}
+    num_as_list = list(str(digits))
+    for num in num_as_list:
+        for key in hex_map.keys():
             if num is key:
-                num = hexMap.get(key)
-        lenOfNum -= 1
-        total += int(num) * (base**lenOfNum)
+                num = hex_map.get(key)
+        len_of_num -= 1
+        total += int(num) * (base**len_of_num)
     return total
 
 
@@ -33,7 +33,19 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
 
+    # base 16
     hex_map = {10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f"}
+
+    # base_25 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15, "g": 16, "h": 17, "i": 18, "j": 19, "k": 20, "l": 21, "m": 22, "n": 23, "o": 24, 10: 25}
+
+    base_25 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: 10}
+
+    # base 32
+    duotrigesimal = {0: "a", 1: "b", 2: "c", 3: "d", 4: "e", 5: "f",6: "g", 7: "h", 8: "i", 9: "j", 10: "k", 11: "l", 12: "m", 13: "n", 14: "o", 15: "p", 16: "q", 17: "r", 18: "s", 19: "t", 20: "u", 21: "v", 22: "w", 23: "x", 24: "y", 25: "z", 26: "2", 27: "3", 28: "4", 29: "5", 30: "6", 31: "7"}
+
+    # base 36
+
+
     result_list = []
     my_str = ""
 
@@ -44,7 +56,19 @@ def encode(number, base):
             for key in hex_map.keys():
                 if key is remainder:
                     remainder = hex_map.get(key)
+        if (base is 25):
+            for key in base_25.keys():
+                if key is remainder:
+                    remainder = base_25.get(key)
+                    
+        # if (base is 32):
+        #     for key in duotrigesimal.keys():
+        #         if key is remainder:
+        #             remainder = duotrigesimal.get(key)
+        # if (base is 36):
+        #     for key in 
         result_list += [remainder]
+        print(result_list)
         number = whole_num
     for num in result_list:
         my_str += str(num)
@@ -85,5 +109,5 @@ def main():
 
 if __name__ == "__main__":
     # main()
-    binary = encode(1, 2)
+    binary = encode(248975, 25)
     print(binary)
