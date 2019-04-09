@@ -63,10 +63,34 @@ def binary_search_iterative(array, item):
         else:
             return None # not found
 
+def binary_search_recursive(array, item, left=None, right=None):
+    if item in array:
+        # set left and right starter values
+        if left == None and right == None:
+            return binary_search_recursive(array, item, left=0, right=((len(array) -1) // 2))
+        
+        # base case
+        if (array[right] == item):
+            return right # => found
+        
+        # recursive cases
+        if left <= right:
+            if (array[right] < item): 
+                # go right
+                # print(right)
+                return binary_search_recursive(array, item, left = (left + right) // 2, right= right + 1)
+            elif (array[right] > item): 
+                # go left
+                print("going left")
+                # return binary_search_recursive(array, item, left = right + 1, right=(left + right) // 2)
+                return binary_search_recursive(array, item, left = (left + right) // 2, right= right -1)
+    return None # not found
+
 if __name__ == "__main__":
-    my_array = [1,2,3,4,5,6,7]
+    my_array = [1,2,3,4,5,6]
     # bin_search = binary_search_iterative(my_array, 6)
     # print(bin_search)
     # print(linear_search_recursive(my_array, 3))
-    # print(linear_search_iterative(my_array, 3))
-    print(binary_search_iterative(my_array, 1))
+    names = ['Alex', 'Brian', 'Julia', 'Kojin', 'Nabil', 'Nick', 'Winnie']
+    print(binary_search_recursive(names, "Brian"))
+  
