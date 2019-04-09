@@ -46,9 +46,27 @@ def linear_search_recursive(array, item, index=0):
         return linear_search_recursive(array, item, index + 1)
     return None # not found
 
+def binary_search_iterative(array, item):
+    left = 0
+    right = len(array) -1
+
+    while (left <= right):
+        midpoint = (left + right) // 2
+        if (array[midpoint] == item):
+            return True # found
+        elif (array[midpoint] < item):
+            # go right
+            left = midpoint + 1
+        elif (array[midpoint] > item):
+            # go left
+            right = midpoint - 1
+        else:
+            return None # not found
+
 if __name__ == "__main__":
-    my_array = [9,1,5,2,3,6,4,7,8,10]
+    my_array = [1,2,3,4,5,6,7]
     # bin_search = binary_search_iterative(my_array, 6)
     # print(bin_search)
-    print(linear_search_recursive(my_array, 3))
-    print(linear_search_iterative(my_array, 3))
+    # print(linear_search_recursive(my_array, 3))
+    # print(linear_search_iterative(my_array, 3))
+    print(binary_search_iterative(my_array, 1))

@@ -35,21 +35,21 @@ def binary_search(array, item):
 
 
 def binary_search_iterative(array, item):
-    # TODO: implement binary search iteratively here
     left = 0
     right = len(array) -1
 
-    while (left >= right): # loop through this as long as left & right are in the correct positions
+    while (left <= right):
         midpoint = (left + right) // 2
         if (array[midpoint] == item):
-            return True
+            return midpoint # found
         elif (array[midpoint] < item):
             # go right
-            midpoint = midpoint - 1
-        else:
+            left = midpoint + 1
+        elif (array[midpoint] > item):
             # go left
-            midpoint = midpoint + 1
-    return None # not found
+            right = midpoint - 1
+        else:
+            return None # not found
 
 
 def binary_search_recursive(array, item, left=None, right=None):
