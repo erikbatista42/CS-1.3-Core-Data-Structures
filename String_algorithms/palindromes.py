@@ -13,8 +13,8 @@ def is_palindrome(text):
     # implement is_palindrome_iterative and is_palindrome_recursive below, then
     # change this to call your implementation to verify it passes all tests
     assert isinstance(text, str), 'input is not a string: {}'.format(text)
-    return is_palindrome_iterative(text)
-    # return is_palindrome_recursive(text)
+    # return is_palindrome_iterative(text)
+    return is_palindrome_recursive(text)
 
 
 def is_palindrome_iterative(text):
@@ -31,17 +31,38 @@ def is_palindrome_iterative(text):
             continue
     text_reversed = "".join(text_reversed)
     new_text = "".join(new_text)
-    
+
     if text_reversed == new_text:
-        return True
-    return False
+        return True # found
+    return False # not found
 
+alphabet = string.ascii_lowercase
+def is_palindrome_recursive(text, left=None, right=None, new_text=None):
+    
+    # set new_text value
+    if new_text == None:
+        # list comprehension at new_text returns text list with no special characters 
+        return is_palindrome_recursive(text, left = None, right = None, new_text=[char for char in text.lower() if char in alphabet])
+    # set left and right values
+    if left == None and right == None:
+        return is_palindrome_recursive(text, left = 0, right = len(new_text) -1, new_text = new_text)
 
-def is_palindrome_recursive(text, left=None, right=None):
-    # TODO: implement the is_palindrome function recursively here
-    pass
-    # once implemented, change is_palindrome to call is_palindrome_recursive
-    # to verify that your iterative implementation passes all tests
+    # if there are 2 items and are not the same 
+    if len(new_text) -1 == 1 and new_text[left] != new_text[right]:
+        return False
+
+    # empty string or one char in text 
+    if left > right or left == 0 and right == 0: 
+        return True 
+    
+    if left + 1 == right and right -1 == left and new_text[left] == new_text[right]:
+        return True 
+    # both pointers are the same
+    elif new_text[left] == new_text[right]:
+        return is_palindrome_recursive(text, left +1, right -1, new_text)
+    else:
+        return False 
+
 
 
 def main():
@@ -59,6 +80,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-    print(is_palindrome_iterative("RaceCar"))
-    # print("RaceCar".lower())
+    # main()
+    # print(is_palindrome_iterative("RaceCar"))
+    print(is_palindrome_recursive("ABCZBA"))
