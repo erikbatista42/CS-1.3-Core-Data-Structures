@@ -6,6 +6,28 @@ def contains(text, pattern):
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     # TODO: Implement contains here (iteratively and/or recursively)
 
+    # if pattern has no characters/ empty str
+    if pattern == "":
+        return True
+    # if pattern has one char 
+    if len(pattern) == 1:
+        if pattern in text:
+            return True
+        else: 
+            return False
+
+    pattern_index = 0
+    for char in text:
+        if char == pattern[pattern_index]:
+            pattern_index += 1
+            if len(pattern) == pattern_index:
+                return True
+        elif len(pattern) == 2:
+            pattern_index = 0
+        else:
+            pattern_index = 0
+            pattern_index += 1
+    return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -53,4 +75,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    print(contains("ababc","abc"))
