@@ -2,15 +2,10 @@
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
-    assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
-
-    # if pattern has no characters/ empty str
-    if pattern == "":
+    if pattern == "": # empty string
         return True
-    # if pattern has one char 
-    if len(pattern) == 1:
+
+    if len(pattern) == 1: 
         if pattern in text:
             return True
         else: 
@@ -32,9 +27,28 @@ def contains(text, pattern):
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
-    assert isinstance(text, str), 'text is not a string: {}'.format(text)
-    assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+    if pattern == "":
+        return 0
+    # if pattern not in text:
+    #     return None
+    text_index = 0
+    pattern_index = 0
+    for char in text:
+        if char == pattern[pattern_index]:
+            pattern_index += 1
+            text_index += 1
+            if pattern_index == len(pattern):
+                text_index -= len(pattern)
+                return text_index
+        else:
+            text_index += 1
+            pattern_index = 0
+            if char == pattern[pattern_index]:
+                pattern_index += 1
+
+    return None # not found
+    
+
 
 
 def find_all_indexes(text, pattern):
@@ -76,4 +90,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(contains("ababc","abc"))
+    print(find_index("abcdef", "ba"))
