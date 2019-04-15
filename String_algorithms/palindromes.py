@@ -18,19 +18,20 @@ def is_palindrome(text):
 
 
 def is_palindrome_iterative(text):
+    # Best & Worse running time: O(n) because we're iterating n elements (I think) because we iterate n times, we search and insert
     new_text = []
     text_reversed = []
     lower_case_alphabet = string.ascii_lowercase
 
     # ignore all special characters
-    for char in text.lower():
-        if char in lower_case_alphabet:
-            text_reversed.insert(0, char)
-            new_text.append(char)
+    for char in text.lower(): # O(n) => Looking through n elements
+        if char in lower_case_alphabet: # search => O(n)
+            text_reversed.insert(0, char) # insertion => O(n)
+            new_text.append(char) # O(1)
         else:
             continue
-    text_reversed = "".join(text_reversed)
-    new_text = "".join(new_text)
+    text_reversed = "".join(text_reversed)# O(n)? Iterating through text_reversed with n elements
+    new_text = "".join(new_text) # O(n)? Iterating through new_text with n elements
 
     if text_reversed == new_text:
         return True # found
@@ -38,6 +39,7 @@ def is_palindrome_iterative(text):
 
 
 def is_palindrome_recursive(text, left=None, right=None, new_text=None):
+    # O(n*n) because we use the list comprehension to iterate n elements and function keeps calling itself until base conditions are called
     alphabet = string.ascii_lowercase
     # set new_text value
     if new_text == None:

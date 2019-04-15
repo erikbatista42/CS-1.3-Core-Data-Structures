@@ -29,8 +29,7 @@ def find_index(text, pattern):
     or None if not found."""
     if pattern == "":
         return 0
-    # if pattern not in text:
-    #     return None
+
     text_index = 0
     pattern_index = 0
     for char in text:
@@ -49,14 +48,37 @@ def find_index(text, pattern):
     return None # not found
     
 
-
-
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+    index_list = []
+    if pattern == "":
+        for i in range(0, len(text)):
+            index_list.append(i)
+        return index_list
+    
+    text_index = 0
+    pattern_index = 0
+    pattern_index_two = 0
+
+    for char in text:
+        if char == pattern[pattern_index]:
+            pattern_index += 1
+            text_index += 1
+            if pattern_index == len(pattern):
+                a = text_index - len(pattern)
+                index_list.append(a)
+                pattern_index = 0
+        else:
+            text_index += 1
+            pattern_index = 0
+            if char == pattern[pattern_index]:
+                pattern_index += 1
+
+    return index_list # not found
+
 
 
 def test_string_algorithms(text, pattern):
@@ -90,4 +112,4 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(find_index("abcdef", "ba"))
+    print(find_all_indexes("bananas", "nas"))
