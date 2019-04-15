@@ -79,14 +79,13 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(n) – Because we have to iterate through """
         # TODO: Insert given item
         self.list.append(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
-        # TODO: Return top item, if any
         if self.is_empty():
             return None
         return self.list[-1]
@@ -94,7 +93,7 @@ class ArrayStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – Popping last item is constant time"""
         if self.is_empty():
             raise ValueError("Err! Stack is empty! - There is nothing to pop.")
         try:
