@@ -57,7 +57,7 @@ class LinkedList(object):
 
     def length(self):
         """Return the length of this linked list by traversing its nodes.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(n) because we have to loop through each node"""
         # Node counter initialized to zero
         node_count = 0
         # Start at the head node
@@ -74,8 +74,8 @@ class LinkedList(object):
     def get_at_index(self, index):
         """Return the item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) under what conditions? If the index is the head or tail
+        Worst case running time: O(n) under what conditions? If we have to loop through all the nodes"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
@@ -83,10 +83,14 @@ class LinkedList(object):
         current_node = self.head
         index_counter = 0
 
-        while current_node is not None:
-            # return the head if the index is 0.
-            if index == 0:
-                return self.head.data
+        # if index is head
+        if index == 0:
+            return self.head.data
+        # if index is tail
+        if index == self.size -1:
+            return self.tail.data
+
+        while current_node is not None: # O(n)
             # add to the index tracker and set the node to the next one. 
             index_counter += 1
             current_node = current_node.next
@@ -96,8 +100,8 @@ class LinkedList(object):
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
         raise ValueError if the given index is out of range of the list size.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) under what conditions? If the list is empty or when there is 1 element in the list
+        Worst case running time: O(n) under what conditions? When we have to loop through the nodes to find the index"""
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
@@ -137,7 +141,7 @@ class LinkedList(object):
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) under what conditions? Appending anything because we don't have to traverse """
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -154,7 +158,7 @@ class LinkedList(object):
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
-        Best and worst case running time: ??? under what conditions? [TODO]"""
+        Best and worst case running time: O(1) under what conditions? Because we don't have to traverse. We're just adding at the beginning of the list."""
         # Create a new node to hold the given item
         new_node = Node(item)
         # Check if this linked list is empty
@@ -190,8 +194,8 @@ class LinkedList(object):
     def replace(self, old_item, new_item):
         """Replace the given old_item in this linked list with given new_item
         using the same node, or raise ValueError if old_item is not found.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(1) under what conditions? If the item we want to replace is the head
+        Worst case running time: O(n) under what conditions? When we have to traverse to find the old item"""
         current_node = self.head
         found = False
         # if node is head
@@ -211,8 +215,10 @@ class LinkedList(object):
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
-        Best case running time: ??? under what conditions? [TODO]
-        Worst case running time: ??? under what conditions? [TODO]"""
+        Best case running time: O(n) under what conditions? Because we have to traverse the list no matter what to see if we found the node we're looking for
+        
+        Worst case running time: O(n) under what conditions? Because we have to traverse the list no matter what to see if we found the node we're looking for
+        """
         # Start at the head node
         node = self.head
         # Keep track of the node before the one containing the given item
