@@ -29,7 +29,7 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – Appending to the end of a linked list is constant time"""
         self.list.append(item)
 
     def peek(self):
@@ -42,10 +42,11 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) – Because we're removing the tail of a linked list, which is constant time"""
         # TODO: Remove and return top item, if any
         if self.is_empty():
             raise ValueError("Err! Stack is empty! - There is nothing to pop.")
+        # So we can return, and do somethign afterwards!
         try:
             return self.list.tail.data
         finally:
