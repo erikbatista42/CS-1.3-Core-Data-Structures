@@ -34,22 +34,28 @@ def find_index(text, pattern):
     if pattern == "":
         return 0
 
-    text_index = 0
-    pattern_index = 0
-    for char in text:
-        if char == pattern[pattern_index]:
-            pattern_index += 1
-            text_index += 1
-            if pattern_index == len(pattern):
-                text_index -= len(pattern)
-                return text_index
-        else:
-            text_index += 1
-            pattern_index = 0
-            if char == pattern[pattern_index]:
-                pattern_index += 1
+    # text_index = 0
+    # pattern_index = 0
+    # for char in text:
+    #     if char == pattern[pattern_index]:
+    #         pattern_index += 1
+    #         text_index += 1
+    #         if pattern_index == len(pattern):
+    #             text_index -= len(pattern)
+    #             return text_index
+    #     else:
+    #         text_index += 1
+    #         pattern_index = 0
+    #         if char == pattern[pattern_index]:
+    #             pattern_index += 1
 
-    return None # not found
+    # return None # not found
+    result = find_all_indexes(text, pattern)
+    if len(result) > 0:
+        return result[0]
+    else:
+        return None
+
     
 
 def find_all_indexes(text, pattern):
@@ -69,13 +75,10 @@ def find_all_indexes(text, pattern):
     current_index = 0
 
     for char in text:
-        print("BEFORE IF -> ",char)
         if char == pattern[pattern_index]:
-            print("IF -> ",char)
             current_index = text_index
             print(while_text_index < len(text) -1)
             while while_text_index <= len(text) -1 and text[while_text_index] == pattern[pattern_index] :
-                print("WHILE -> ",char)
                 
                 pattern_index += 1
                 text_index += 1
