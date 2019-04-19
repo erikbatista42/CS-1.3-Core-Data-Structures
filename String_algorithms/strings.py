@@ -2,27 +2,31 @@
 
 def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
-    if pattern == "": # empty string
+    # if pattern == "": # empty string
+    #     return True
+
+    # if len(pattern) == 1: 
+    #     if pattern in text:
+    #         return True
+    #     else: 
+    #         return False
+
+    # pattern_index = 0
+    # for char in text:
+    #     if char == pattern[pattern_index]:
+    #         pattern_index += 1
+    #         if len(pattern) == pattern_index:
+    #             return True
+    #     elif len(pattern) == 2:
+    #         pattern_index = 0
+    #     else:
+    #         pattern_index = 0
+    #         pattern_index += 1
+    # return False
+    if find_index(text, pattern) == None:
+        return False
+    else:
         return True
-
-    if len(pattern) == 1: 
-        if pattern in text:
-            return True
-        else: 
-            return False
-
-    pattern_index = 0
-    for char in text:
-        if char == pattern[pattern_index]:
-            pattern_index += 1
-            if len(pattern) == pattern_index:
-                return True
-        elif len(pattern) == 2:
-            pattern_index = 0
-        else:
-            pattern_index = 0
-            pattern_index += 1
-    return False
 
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
@@ -61,23 +65,40 @@ def find_all_indexes(text, pattern):
     
     text_index = 0
     pattern_index = 0
-    pattern_index_two = 0
+    while_text_index = 0
+    current_index = 0
 
     for char in text:
+        print("BEFORE IF -> ",char)
         if char == pattern[pattern_index]:
-            pattern_index += 1
-            text_index += 1
-            if pattern_index == len(pattern):
-                a = text_index - len(pattern)
-                index_list.append(a)
-                pattern_index = 0
-        else:
-            text_index += 1
-            pattern_index = 0
-            if char == pattern[pattern_index]:
+            print("IF -> ",char)
+            current_index = text_index
+            print(while_text_index < len(text) -1)
+            while while_text_index <= len(text) -1 and text[while_text_index] == pattern[pattern_index] :
+                print("WHILE -> ",char)
+                
                 pattern_index += 1
+                text_index += 1
+                while_text_index += 1
 
-    return index_list # not found
+                if pattern_index == len(pattern):
+                    actual_index_start = text_index - len(pattern)
+                    index_list.append(actual_index_start)
+                    break
+
+            text_index = current_index + 1
+            pattern_index = 0
+            while_text_index = current_index + 1
+
+
+        else:
+            text_index += 1       
+            pattern_index = 0
+            while_text_index += 1
+            # if char == pattern[pattern_index]:
+            #     pattern_index += 1
+
+    return index_list
 
 
 
@@ -112,4 +133,6 @@ def main():
 
 if __name__ == '__main__':
     # main()
-    print(find_all_indexes("bananas", "nas"))
+    # print(find_all_indexes("abc", "cc"))
+    # 10 a
+    print(find_all_indexes("aaaaaaaaaa", "aaa"))
