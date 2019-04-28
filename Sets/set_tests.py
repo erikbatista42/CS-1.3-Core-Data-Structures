@@ -15,6 +15,23 @@ class SetTest(unittest.TestCase):
         assert set.contains("D")
         assert set.contains("E")
         assert set.size == 5
+    
+    def test_remove(self):
+        set = Set(["A","B","C"])
+        set.remove("C")
+        set.remove("B")
+        assert set.size == 1
+        assert set.contains("B") == False
+    
+    def test_contains(self):
+        set = Set(["A","B","C"])
+        # actually containing
+        assert set.contains("A") == True
+        assert set.contains("B") == True
+        assert set.contains("C") == True
+        # not containing 
+        assert set.contains("D") == False
+        assert set.contains("E") == False
 
 if __name__ == "__main__":
     unittest.main()
