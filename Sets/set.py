@@ -5,6 +5,9 @@ class Set():
     def __init__(self, elements=None):
         self.table = SetHashTable()
         self.size = 0
+        self.elements = elements
+        for item in elements:
+            self.add(item)
        
     def contains(self, value):
         # return a boolean indicating whether element is in this set
@@ -25,11 +28,8 @@ class Set():
         self.size = self.table.size
 
 if __name__ == "__main__":
-    set = Set()
-    set.add("marian")
-    set.add("bob")
-    set.remove("marian")
-    print(set.table)
+    set = Set(["marian","bob","yo-yo"])
+    print(set.elements[1])
    
     
     

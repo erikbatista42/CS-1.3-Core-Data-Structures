@@ -125,12 +125,9 @@ class SetHashTable(object):
         Worst case running time: ??? under what conditions? [TODO]"""
         # Find the bucket the given key belongs in
         index = self._bucket_index(value)
-        print("-----------INDEX--------: ", index)
         bucket = self.buckets[index]
-        print("-----------BUCKET--------: ", bucket)
         # Find the entry with the given key in that bucket, if one exists
         entry = bucket.find(lambda key_value: key_value == value)
-        print("-----------ENTRY--------: ", entry)
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
