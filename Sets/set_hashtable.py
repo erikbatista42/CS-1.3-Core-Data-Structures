@@ -10,11 +10,6 @@ class SetHashTable(object):
         self.buckets = [LinkedList() for i in range(init_size)]
         self.size = 0  # Number of key-value entries
 
-    def __str__(self):
-        """Return a formatted string representation of this hash table."""
-        items = ['{!r}: {!r}'.format(key, val) for key, val in self.items()]
-        return '{' + ', '.join(items) + '}'
-
     def __repr__(self):
         """Return a string representation of this hash table."""
         return 'HashTable({!r})'.format(self.items())
@@ -110,7 +105,7 @@ class SetHashTable(object):
         bucket = self.buckets[index]
         # Find the entry with the given key in that bucket, if one exists
         # Check if an entry with the given key exists in that bucket
-        entry = bucket.find(lambda key_value: key_value[0] == key)
+        entry = bucket.find(lambda key_value: key_value[0] == value)
         if entry is not None:  # Found
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
@@ -129,16 +124,19 @@ class SetHashTable(object):
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
         # Find the bucket the given key belongs in
-        index = self._bucket_index(key)
+        index = self._bucket_index(value)
+        print("-----------INDEX--------: ", index)
         bucket = self.buckets[index]
+        print("-----------BUCKET--------: ", bucket)
         # Find the entry with the given key in that bucket, if one exists
-        entry = bucket.find(lambda key_value: key_value[0] == key)
+        entry = bucket.find(lambda key_value: key_value == value)
+        print("-----------ENTRY--------: ", entry)
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
             self.size -= 1
         else:  # Not found
-            raise KeyError('Key not found: {}'.format(key))
+            raise KeyError('Value not found: {}'.format(value))
 
     def _resize(self, new_size=None):
         # rehash - linear probing or chaining (dealing with hash collision)
@@ -179,6 +177,8 @@ class SetHashTable(object):
             self.set(k,v)
         
         
+
+
 def test_hash_table():
     ht = SetHashTable(4)
     print('HashTable: ' + str(ht))
@@ -228,13 +228,16 @@ def test_hash_table():
 if __name__ == '__main__':
     # test_hash_table()
     table = SetHashTable(5)
-    table.set("erik")
-    table.set("bob")
+    table.set("erik", 19)
+    table.set("bob", 23)
     # table.delete("bob")
-    # table.get("erik")
-    table.set("marla")
+    table.get("erik")
+    table.set("marla", 20)
     # print(table.load_factor())
     # print(table)
+    temp_entries = {}
+    for k,v in table.items():
+        temp_entries[k] = v
     # print(temp_entries)
     new_size = 4
     load_factor = 2
