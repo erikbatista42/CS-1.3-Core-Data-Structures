@@ -79,17 +79,22 @@ class Set():
         
     
     def is_subset(self, other_set):
-        # explanation
-        pass
+        # return a bool of which all the self elements are contained in another set.
+        for item in self.elements:
+            if item in other_set.elements:
+                continue
+            else:
+                return False
+        return True
 
 
 if __name__ == "__main__":
-    set_one = Set(["M","L","A", "C", "Z","W"])
-    set_two = Set(["X", "N", "O","L", "A", "M"])
+    set_one = Set(["A","B","C","N"])
+    set_two = Set(["A","B","C","D", "E", "F"])
     # print(set_two)
     # print(set_one.elements + set_two.elements)
     o = set_one.intersection(set_two)
-    print(set_one.difference(set_two))
+    print(set_one.is_subset(set_two))
 
     
     
