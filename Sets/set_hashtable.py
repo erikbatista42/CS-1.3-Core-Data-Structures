@@ -170,10 +170,11 @@ class SetHashTable(object):
         # reinit our buckets and size 
         self.__init__(new_size) # O(2b) => O(b)
         # rehash them into new buckets
-        for k, v in temp_entries:
-            self.set(k,v)
+        for v in temp_entries:
+            self.set(v)
         
-        
+    def clear(self):
+        self.__init__() # remove all items in table 
 
 
 def test_hash_table():

@@ -33,5 +33,18 @@ class SetTest(unittest.TestCase):
         assert set.contains("D") == False
         assert set.contains("E") == False
 
+    def test_union(self):
+        set_one = Set(["A","B","C"])
+        set_two = Set(["A","B","C","E","F","G"])
+        union = set_one.union(set_two)
+        assert union.contains("A") == True
+        assert union.contains("B") == True
+        assert union.contains("C") == True
+        assert union.contains("E") == True
+        assert union.contains("F") == True
+        assert union.contains("G") == True
+        assert union.size == 6
+
+
 if __name__ == "__main__":
     unittest.main()
