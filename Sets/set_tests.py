@@ -44,6 +44,39 @@ class SetTest(unittest.TestCase):
         assert union.contains("F") == True
         assert union.contains("G") == True
         assert union.size == 6
+    
+    def test_intersection(self):
+        set_one = Set(["sam","bob","joe"])
+        set_two = Set(["sam","bob","marian","yo-yo"])
+        intersection = set_one.intersection(set_two) 
+        assert intersection.contains("sam") == True
+        assert intersection.contains("bob") == True
+        assert intersection.contains("joe") == False
+        assert intersection.contains("marian") == False
+    
+    def test_difference(self):
+        set_one = Set(["M", "L", "A", "C", "Z", "W"])
+        set_two = Set(["X", "N", "O", "L", "A", "M"])
+        difference = set_one.difference(set_two)
+        assert difference.contains("C") == True
+        assert difference.contains("Z") == True
+        assert difference.contains("W") == True
+        assert difference.contains("A") == False
+        assert difference.contains("O") == False
+
+    def test_is_subset(self):
+        set_one = Set(["A","B","C"])
+        set_two = Set(["A","B","C","E","F","G"])
+        set_three = Set(["A","B","C","D"])
+        # true subsets
+        assert set_one.is_subset(set_three) == True
+        assert set_one.is_subset(set_two) == True
+        assert set_one.is_subset(set_three) == True
+        # false subsets
+        assert set_two.is_subset(set_three) == False
+        assert set_two.is_subset(set_one) == False
+        assert set_three.is_subset(set_two) == False
+
 
 
 if __name__ == "__main__":

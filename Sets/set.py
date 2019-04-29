@@ -79,7 +79,7 @@ class Set():
         
     
     def is_subset(self, other_set):
-        # return a bool of which all the self elements are contained in another set.
+        # returns a bool on if all the self elements are contained in another set.
         for item in self.elements:
             if item in other_set.elements:
                 continue
