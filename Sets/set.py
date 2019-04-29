@@ -60,8 +60,23 @@ class Set():
         return new_set
     
     def difference(self, other_set):
-        # explanation
-        pass
+        """
+        Yields the difference betweens two sets. 
+        or 
+        all the elements in self that are not in the other_set
+        -Example:
+        self = ["M", "L", "A", "C", "Z", "W"]
+        other_set = ["X", "N", "O", "L", "A", "M"]
+        self - other_set = ["C", Z", "W"]
+        """
+        result_set = self
+        result_set.table.clear()
+
+        for item in self.elements:
+            if item not in other_set.elements:
+                result_set.add(item)
+        return result_set
+        
     
     def is_subset(self, other_set):
         # explanation
@@ -69,12 +84,12 @@ class Set():
 
 
 if __name__ == "__main__":
-    set_one = Set(["sam","bob","joe"])
-    set_two = Set(["sam", "bob", "marian","yo-yo"])
+    set_one = Set(["M","L","A", "C", "Z","W"])
+    set_two = Set(["X", "N", "O","L", "A", "M"])
     # print(set_two)
     # print(set_one.elements + set_two.elements)
     o = set_one.intersection(set_two)
-    print(o)
+    print(set_one.difference(set_two))
 
     
     
