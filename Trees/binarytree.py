@@ -146,7 +146,6 @@ class BinarySearchTree(object):
         return None # Not found
 
     def _find_node_recursive(self, item, node):
-        pass
         """Return the node containing the given item in this binary search tree,
         or None if the given item is not found. Search is performed recursively
         starting from the given node (give the root node to start recursion).
@@ -154,21 +153,21 @@ class BinarySearchTree(object):
         TODO: Worst case running time: ??? under what conditions?"""
         # Check if starting node exists
 
-        # if node is None:
-        #     # Not found (base case)
-        #     return None
-        # # TODO: Check if the given item matches the node's data
-        # elif ...:
-        #     # Return the found node
-        #     return node
-        # # TODO: Check if the given item is less than the node's data
-        # elif ...:
-        #     # TODO: Recursively descend to the node's left child, if it exists
-        #     return ...
-        # # TODO: Check if the given item is greater than the node's data
-        # elif ...:
-        #     # TODO: Recursively descend to the node's right child, if it exists
-        #     return ...
+        if node is None:
+            # Not found (base case)
+            return None
+        # TODO: Check if the given item matches the node's data
+        elif item == node.data:
+            # Return the found node
+            return node
+        # TODO: Check if the given item is less than the node's data
+        elif item < node.data:
+            # TODO: Recursively descend to the node's left child, if it exists
+            return self._find_node_recursive(self, item, node = node.left)
+        # TODO: Check if the given item is greater than the node's data
+        elif item > node.data:
+            # TODO: Recursively descend to the node's right child, if it exists
+            return self._find_node_recursive(self, item, node = node.right)
 
     def _find_parent_node_iterative(self, item):
         """Return the parent node of the node containing the given item
