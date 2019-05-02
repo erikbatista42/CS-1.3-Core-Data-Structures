@@ -91,7 +91,7 @@ class BinarySearchTree(object):
         TODO: Best case running time: ??? under what conditions?
         TODO: Worst case running time: ??? under what conditions?"""
         # Find a node with the given item, if any
-        node = self._find_node_recursive(item, self.root)
+        node = self._find_node_iterative(item)
         if node is not None:
             return node
         else:
@@ -140,7 +140,7 @@ class BinarySearchTree(object):
                 # TODO: Descend to the node's left child
                 node = node.left
             # TODO: Check if the given item is greater than the node's data
-            elif item < node.data:
+            elif item > node.data:
                 # TODO: Descend to the node's right child
                 node = node.right
         return None # Not found
@@ -384,4 +384,8 @@ if __name__ == '__main__':
     for data in nodes:
         tree.insert(data)
 
-    print(tree.size)
+    item = 4
+
+    result = tree.search(item)
+
+    print(result.data)
