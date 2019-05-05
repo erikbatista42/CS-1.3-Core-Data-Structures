@@ -1,6 +1,7 @@
 
 #!python
 
+import logging
 
 class BinaryTreeNode(object):
 
@@ -32,21 +33,20 @@ class BinaryTreeNode(object):
             return False
 
 
-    # def height(self):
-    #     """Return the height of this node (the number of edges on the longest
-    #     downward path from this node to a descendant leaf node).
-    #     TODO: Best and worst case running time: ??? under what conditions?"""
-    #     height = 0
-    #     if self.left is None and self.right is None:
-    #         return height
-        
-    #     if self.left is not None: # left child has a value
-    #         # check height
+    def height(self):
+        """Return the height of this node (the number of edges on the longest
+        downward path from this node to a descendant leaf node).
+        TODO: Best and worst case running time: ??? under what conditions?"""
+        left_height = 0
+        right_height = 0
 
+        if self.left is not None:
+            left_height = 1 + self.left.height()
+        if self.right is not None:
+            right_height = 1 + self.right.height()
             
-    #     if self.right is not None: # right child has a value
-    #         # check height
-    #     # return one more than the greater of the left height and right height
+        # max returns the largest num between the two arguments
+        return max(left_height, right_height)
 
 
 class BinarySearchTree(object):
@@ -72,9 +72,7 @@ class BinarySearchTree(object):
         downward path from this tree's root node to a descendant leaf node).
         TODO: Best and worst case running time: ??? under what conditions?"""
         # TODO: Check if root node has a value and if so calculate its height
-        if self.root is not None:
-            # calculate its height
-            pass
+        return self.root.height # calculate height here
 
     def contains(self, item):
         """Return True if this binary search tree contains the given item.
@@ -224,6 +222,36 @@ class BinarySearchTree(object):
             node = node.right
             return self._find_parent_node_recursive(self, item, node, parent=node)  # Hint: Remember to update the parent parameter
 
+if __name__ == '__main__':
+    # test_binary_search_tree()
+    nodes = ["A","B","C"]
+    o = "O"
+    tree = BinarySearchTree()
+
+    for data in nodes:
+        tree.insert(data)
+
+    result = tree.search("C")   
+
+    root_node = BinaryTreeNode("A")
+
+    left_node_1 = BinaryTreeNode("B")
+    left_node_2 = BinaryTreeNode("C")
+    right_node_1 = BinaryTreeNode("D")
+    right_node_2 = BinaryTreeNode("E")
+    right_node_3 = BinaryTreeNode("F")
+
+    root_node.left = left_node_1
+    left_node_1.left = left_node_2
+    left_node_1.right = right_node_1
+    right_node_1.right = right_node_2
+    right_node_2.right = right_node_3
+
+    print(right_node_1.height())
+
+
+
+
     # def delete(self, item):
     #     """Remove given item from this tree, if present, or raise ValueError.
     #     TODO: Best case running time: ??? under what conditions?
@@ -346,48 +374,36 @@ class BinarySearchTree(object):
     #         ...
 
 
-def test_binary_search_tree():
-    # Create a complete binary search tree of 3, 7, or 15 items in level-order
-    # items = [2, 1, 3]
-    items = [4, 2, 6, 1, 3, 5, 7]
-    # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
-    print('items: {}'.format(items))
+# def test_binary_search_tree():
+#     # Create a complete binary search tree of 3, 7, or 15 items in level-order
+#     # items = [2, 1, 3]
+#     items = [4, 2, 6, 1, 3, 5, 7]
+#     # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
+#     print('items: {}'.format(items))
 
-    tree = BinarySearchTree()
-    print('tree: {}'.format(tree))
-    print('root: {}'.format(tree.root))
+#     tree = BinarySearchTree()
+#     print('tree: {}'.format(tree))
+#     print('root: {}'.format(tree.root))
 
-    print('\nInserting items:')
-    for item in items:
-        tree.insert(item)
-        print('insert({}), size: {}'.format(item, tree.size))
-    print('root: {}'.format(tree.root))
+#     print('\nInserting items:')
+#     for item in items:
+#         tree.insert(item)
+#         print('insert({}), size: {}'.format(item, tree.size))
+#     print('root: {}'.format(tree.root))
 
-    print('\nSearching for items:')
-    for item in items:
-        result = tree.search(item)
-        print('search({}): {}'.format(item, result))
-    item = 123
-    result = tree.search(item)
-    print('search({}): {}'.format(item, result))
+#     print('\nSearching for items:')
+#     for item in items:
+#         result = tree.search(item)
+#         print('search({}): {}'.format(item, result))
+#     item = 123
+#     result = tree.search(item)
+#     print('search({}): {}'.format(item, result))
 
-    print('\nTraversing items:')
-    print('items in-order:    {}'.format(tree.items_in_order()))
-    print('items pre-order:   {}'.format(tree.items_pre_order()))
-    print('items post-order:  {}'.format(tree.items_post_order()))
-    print('items level-order: {}'.format(tree.items_level_order()))
+#     print('\nTraversing items:')
+#     print('items in-order:    {}'.format(tree.items_in_order()))
+#     print('items pre-order:   {}'.format(tree.items_pre_order()))
+#     print('items post-order:  {}'.format(tree.items_post_order()))
+#     print('items level-order: {}'.format(tree.items_level_order()))
 
 
-if __name__ == '__main__':
-    # test_binary_search_tree()
-    nodes = ["A","B","C"]
-    tree = BinarySearchTree()
 
-    for data in nodes:
-        tree.insert(data)
-
-    # item = 4
-
-    result = tree.search("C")
-
-    print(tree)
