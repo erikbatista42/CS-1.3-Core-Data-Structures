@@ -1,7 +1,8 @@
 
 #!python
 
-import logging
+# import custom_queue 
+import custom_queue
 
 class BinaryTreeNode(object):
 
@@ -161,11 +162,11 @@ class BinarySearchTree(object):
         # TODO: Check if the given item is less than the node's data
         elif item < node.data:
             # TODO: Recursively descend to the node's left child, if it exists
-            return self._find_node_recursive(self, item, node = node.left)
+            return _find_node_recursive(self, item, node = node.left)
         # TODO: Check if the given item is greater than the node's data
         elif item > node.data:
             # TODO: Recursively descend to the node's right child, if it exists
-            return self._find_node_recursive(self, item, node = node.right)
+            return _find_node_recursive(self, item, node = node.right)
 
     def _find_parent_node_iterative(self, item):
         """Return the parent node of the node containing the given item
@@ -292,49 +293,51 @@ class BinarySearchTree(object):
         # TODO: Visit this node's data with given function
         visit(node.data)
 
-    # def items_level_order(self):
-    #     """Return a level-order list of all items in this binary search tree."""
-    #     items = []
-    #     if not self.is_empty():
-    #         # Traverse tree level-order from root, appending each node's item
-    #         self._traverse_level_order_iterative(self.root, items.append)
-    #     # Return level-order list of all items in tree
-    #     return items
+    def items_level_order(self):
+        """Return a level-order list of all items in this binary search tree."""
+        items = []
+        if not self.is_empty():
+            # Traverse tree level-order from root, appending each node's item
+            self._traverse_level_order_iterative(self.root, items.append)
+        # Return level-order list of all items in tree
+        return items
 
-    # def _traverse_level_order_iterative(self, start_node, visit):
-    #     """Traverse this binary tree with iterative level-order traversal (BFS).
-    #     Start at the given node and visit each node with the given function.
-    #     TODO: Running time: ??? Why and under what conditions?
-    #     TODO: Memory usage: ??? Why and under what conditions?"""
-    #     # TODO: Create queue to store nodes not yet traversed in level-order
-    #     queue = ...
-    #     # TODO: Enqueue given starting node
-    #     ...
-    #     # TODO: Loop until queue is empty
-    #     while ...:
-    #         # TODO: Dequeue node at front of queue
-    #         node = ...
-    #         # TODO: Visit this node's data with given function
-    #         ...
-    #         # TODO: Enqueue this node's left child, if it exists
-    #         ...
-    #         # TODO: Enqueue this node's right child, if it exists
-    #         ...
+    def _traverse_level_order_iterative(self, start_node, visit):
+        """Traverse this binary tree with iterative level-order traversal (BFS).
+        Start at the given node and visit each node with the given function.
+        TODO: Running time: ??? Why and under what conditions?
+        TODO: Memory usage: ??? Why and under what conditions?"""
+        # TODO: Create queue to store nodes not yet traversed in level-order
+        queue = custom_queue.LinkedQueue()
+        # TODO: Enqueue given starting node
+        queue.enqueue(start_node)
+        # TODO: Loop until queue is empty
+        while not queue.is_empty():
+            # TODO: Dequeue node at front of queue
+            node = queue.dequeue()
+            # TODO: Visit this node's data with given function
+            visit(node.data)
+            # TODO: Enqueue this node's left child, if it exists
+            if node.left:
+                queue.enqueue(node.left)
+            # TODO: Enqueue this node's right child, if it exists
+            if node.right:
+                queue.enqueue(node.right)
 
 if __name__ == "__main__":
     # test_binary_search_tree()
-    items = [2, 1, 3]
+    # items = [2, 1, 3]
     items = [4, 2, 6, 1, 3, 5, 7]
     # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
-    print('items: {}'.format(items))
+    # print('items: {}'.format(items))
 
     tree = BinarySearchTree()
 
     for item in items:
         tree.insert(item)
 
-    print('\nTraversing items:')
-    print('items in-order: {}'.format(tree.items_in_order()))
+    print('Traversing items:')
+    print('items in-order: {}'.format(tree.items_level_order()))
     # nodes = ["A","B","C"]
     # tree = BinarySearchTree()
 
@@ -361,18 +364,18 @@ if __name__ == "__main__":
 
 # def test_binary_search_tree():
 #     # Create a complete binary search tree of 3, 7, or 15 items in level-order
-#     # items = [2, 1, 3]
-#     items = [4, 2, 6, 1, 3, 5, 7]
-#     # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
+    # items = [2, 1, 3]
+    # items = [4, 2, 6, 1, 3, 5, 7]
+    # items = [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15]
 #     print('items: {}'.format(items))
 
-#     tree = BinarySearchTree()
+    # tree = BinarySearchTree()
 #     print('tree: {}'.format(tree))
 #     print('root: {}'.format(tree.root))
 
 #     print('\nInserting items:')
-#     for item in items:
-#         tree.insert(item)
+    # for item in items:
+    #     tree.insert(item)
 #         print('insert({}), size: {}'.format(item, tree.size))
 #     print('root: {}'.format(tree.root))
 
@@ -384,11 +387,11 @@ if __name__ == "__main__":
 #     result = tree.search(item)
 #     print('search({}): {}'.format(item, result))
 
-#     print('\nTraversing items:')
+    # print('\nTraversing items:')
 #     print('items in-order:    {}'.format(tree.items_in_order()))
 #     print('items pre-order:   {}'.format(tree.items_pre_order()))
 #     print('items post-order:  {}'.format(tree.items_post_order()))
-#     print('items level-order: {}'.format(tree.items_level_order()))
+    # print('items level-order: {}'.format(tree.items_level_order()))
 
 
 
