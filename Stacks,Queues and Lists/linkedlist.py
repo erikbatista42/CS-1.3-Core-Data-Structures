@@ -197,17 +197,14 @@ class LinkedList(object):
         Best case running time: O(1) under what conditions? If the item we want to replace is the head
         Worst case running time: O(n) under what conditions? When we have to traverse to find the old item"""
         current_node = self.head
-        found = False
         # if node is head
-        if self.head.data == old_item and found == False:
+        if self.head.data == old_item:
             self.head.data = new_item
-            found = True
             return
 
-        while current_node is not None and found == False:
+        while current_node is not None:
             if current_node.data == old_item:
                 current_node.data = new_item
-                found = True
                 return
             current_node = current_node.next
 

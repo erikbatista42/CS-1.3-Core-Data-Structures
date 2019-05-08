@@ -77,7 +77,7 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(1) – Appending to the list is constant time"""
+        Running time: O(n) – Appending to the list is constant time"""
         self.list.append(item)
 
     def front(self):

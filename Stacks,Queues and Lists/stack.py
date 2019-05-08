@@ -21,7 +21,7 @@ class LinkedStack(object):
 
     def is_empty(self):
         """Return True if this stack is empty, or False otherwise."""
-        return self.list.head == None
+        return self.list.is_empty()
 
     def length(self):
         """Return the number of items in this stack."""
@@ -30,27 +30,24 @@ class LinkedStack(object):
     def push(self, item):
         """Insert the given item on the top of this stack.
         Running time: O(1) – Appending to the end of a linked list is constant time"""
-        self.list.append(item)
+        self.list.prepend(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
         if self.list.is_empty():
             return None
-        return self.list.tail.data
+        return self.list.get_at_index(0)
 
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
         Running time: O(1) – Because we're removing the tail of a linked list, which is constant time"""
-        # TODO: Remove and return top item, if any
         if self.is_empty():
             raise ValueError("Err! Stack is empty! - There is nothing to pop.")
-        # So we can return, and do somethign afterwards!
-        try:
-            return self.list.tail.data
-        finally:
-            self.list.delete(self.list.tail.data)
+        item = self.peek()
+        self.list.delete(item)
+        return item
 
 
 # Implement ArrayStack below, then change the assignment at the bottom
@@ -104,11 +101,12 @@ class ArrayStack(object):
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-# Stack = LinkedStack
-Stack = ArrayStack
+Stack = LinkedStack
+# Stack = ArrayStack
 if __name__ == "__main__":
-    my_stack = ArrayStack()
-    # my_stack.push("A")
-    # my_stack.push("B")
-    # my_stack.push("C")
+    my_stack = LinkedStack()
+    my_stack.push("A")
+    my_stack.push("B")
+    my_stack.push("C")
+    print(my_stack)
     # print(my_stack.pop())
