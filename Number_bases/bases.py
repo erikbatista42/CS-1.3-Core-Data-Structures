@@ -10,9 +10,11 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, "base is out of range: {}".format(base)
+    hex_map = {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, "a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15}
+
     len_of_num = len(str(digits))
     total = 0
-    hex_map = {"a": 10, "b": 11, "c": 12, "d": 13, "e": 14, "f": 15}
+    
     num_as_list = list(str(digits))
     for num in num_as_list:
         for key in hex_map.keys():
@@ -40,7 +42,7 @@ def encode(number, base):
 
     base_32 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: "p", 26: "q", 27: "r", 28: "s", 29: "t", 30: "u", 31: "v", 32: 10}
 
-    base_36 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: "p", 26: "q", 27: "r", 28: "s", 29: "t", 30: "u", 31: "v", 32: "w", 33: "x", 34: "y", 35: "z", 36: 10}
+    base_34_36 = {1: 1, 2: 2, 3: 3, 4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: "a", 11: "b", 12: "c", 13: "d", 14: "e", 15: "f", 16: "g", 17: "h", 18: "i", 19: "j", 20: "k", 21: "l", 22: "m", 23: "n", 24: "o", 25: "p", 26: "q", 27: "r", 28: "s", 29: "t", 30: "u", 31: "v", 32: "w", 33: "x", 34: "y", 35: "z", 36: 10}
 
     result_list = []
     my_str = ""
@@ -61,11 +63,11 @@ def encode(number, base):
                 if key is remainder:
                     # print(key)
                     remainder = base_32.get(key)
-        if (base is 36):
-            for key in base_36.keys():
+        if (base is 34) or (base is 36):
+            for key in base_34_36.keys():
                 if key is remainder:
                     # print(key)
-                    remainder = base_36.get(key)
+                    remainder = base_34_36.get(key)
         result_list += [remainder]
         
         number = whole_num
@@ -108,6 +110,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-    binary = encode(1, 32)
+    # main()
+    binary = encode(45, 34)
     print(binary)
