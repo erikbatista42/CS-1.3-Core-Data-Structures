@@ -1,6 +1,8 @@
 #!python
 
 def contains(text, pattern):
+    # Best Case: # O(n) - if there is no pattern. Don't have to iterate if the pattern is empty. So returning False
+    # Worst Case: # O(n^3) - if there is a pattern and we have to loop through the whole thing n^3 times
     """Return a boolean indicating whether pattern occurs in text."""
     # if pattern == "": # empty string
     #     return True
@@ -23,7 +25,7 @@ def contains(text, pattern):
     #         pattern_index = 0
     #         pattern_index += 1
     # return False
-    if find_index(text, pattern) == None:
+    if find_index(text, pattern) == None: # O(n^3)
         return False
     else:
         return True
@@ -31,6 +33,8 @@ def contains(text, pattern):
 def find_index(text, pattern):
     """Return the starting index of the first occurrence of pattern in text,
     or None if not found."""
+    # Best Case: # O(1) - if pattern is empty!
+    # Worst Case: # O(n^3) - because calling find_all_indexes function
     if pattern == "":
         return 0
 
@@ -50,23 +54,24 @@ def find_index(text, pattern):
     #             pattern_index += 1
 
     # return None # not found
-    result = find_all_indexes(text, pattern)
-    if len(result) > 0:
+    result = find_all_indexes(text, pattern) # O(n^3)
+    if len(result) > 0: # O(1) to check length
         return result[0]
-    else:
-        return None
+    else: 
+        return None# O(1)
 
     
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
+    # Best + Worst Case: # O(n^3) - Because we have 3 loops and have to make n^3 iterations. 
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     index_list = []
     if pattern == "":
-        for i in range(0, len(text)):
-            index_list.append(i)
+        for i in range(0, len(text)): # O(n) because it loops n times
+            index_list.append(i) # O(1)
         return index_list
     
     text_index = 0
@@ -74,11 +79,11 @@ def find_all_indexes(text, pattern):
     while_text_index = 0
     current_index = 0
 
-    for char in text:
+    for char in text: # O(n) looping through each character in given text
         if char == pattern[pattern_index]:
             current_index = text_index
             print(while_text_index < len(text) -1)
-            while while_text_index <= len(text) -1 and text[while_text_index] == pattern[pattern_index] :
+            while while_text_index <= len(text) -1 and text[while_text_index] == pattern[pattern_index]: # O(n) because we're doing something n times until a condition is met.
                 
                 pattern_index += 1
                 text_index += 1
