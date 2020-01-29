@@ -73,11 +73,6 @@ def encode(number, base):
         whole_num = number // base
         remainder = number % base
 
-        remainder = base_16_up_to_36.get(remainder)
-
-        if remainder in base_16_up_to_36:
-            
-
         for key in base_16_up_to_36.keys():
             if key == remainder:
                 remainder = base_16_up_to_36.get(key)
