@@ -13,10 +13,21 @@ def factorial(n):
 
 
 def factorial_iterative(n):
-    # TODO: implement the factorial function iteratively here
-    pass
-    # once implemented, change factorial (above) to call factorial_iterative
-    # to verify that your iterative implementation passes all tests
+    '''
+    input Int | output: Int
+    Rephrase: Given a number(n: Int), multiply the number until it reaches 1 and add the multiplied number to the total.
+    
+    Ex:
+    Input: n = 5
+    f(5)
+    [5*4*3*2*1]
+    -> 120
+    '''
+    total = 1
+    for i in range(n, 0, -1):
+        total *= i
+    return total
+
 
 
 def factorial_recursive(n):
