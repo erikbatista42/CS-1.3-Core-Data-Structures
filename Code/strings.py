@@ -4,7 +4,27 @@ def contains(text, pattern):
     """Return a boolean indicating whether pattern occurs in text."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement contains here (iteratively and/or recursively)
+    if not pattern: return True # empty string
+       
+    # if len(pattern) == 1: 
+    #     if pattern in text: return True
+    #     else: return False
+
+    # pattern_index = 0
+    # for char in text:
+    #     if char == pattern[pattern_index]:
+    #         pattern_index += 1
+    #         if len(pattern) == pattern_index: return True
+    #     elif len(pattern) == 2: pattern_index = 0
+    #     else:
+    #         pattern_index = 0
+    #         pattern_index += 1
+    # return False
+
+    # refactored code
+    if find_index(text, pattern) == None: 
+        return False
+    return True
 
 
 def find_index(text, pattern):
@@ -12,16 +32,69 @@ def find_index(text, pattern):
     or None if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_index here (iteratively and/or recursively)
+    if not pattern: return 0
+    # text_index = 0
+    # pattern_index = 0
+    # for char in text:
+    #     if char == pattern[pattern_index]:
+    #         pattern_index += 1
+    #         text_index += 1
+    #         if pattern_index == len(pattern):
+    #             text_index -= len(pattern) # starting index of pattern
+    #             return text_index
+    #     else:
+    #         text_index += 1
+    #         pattern_index = 0
+    #         if char == pattern[pattern_index]:
+    #             pattern_index += 1
+    # return None # not found
 
+    # refactored code
+    result = find_all_indexes(text, pattern) # O(n^3)
+    if len(result) > 0: 
+        return result[0]
+    return None
 
 def find_all_indexes(text, pattern):
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
-    # TODO: Implement find_all_indexes here (iteratively and/or recursively)
+    index_list = []
+    if pattern == "":
+        for i in range(0, len(text)):
+            index_list.append(i) 
+        return index_list
+    
+    text_index = 0
+    pattern_index = 0
+    while_text_index = 0
+    current_index = 0
 
+    for char in text: 
+        if char == pattern[pattern_index]:
+            current_index = text_index
+            print(while_text_index < len(text) -1)
+            while while_text_index <= len(text) -1 and text[while_text_index] == pattern[pattern_index]: # O(n) because we're doing something n times until a condition is met.
+                
+                pattern_index += 1
+                text_index += 1
+                while_text_index += 1
+
+                if pattern_index == len(pattern):
+                    actual_index_start = text_index - len(pattern)
+                    index_list.append(actual_index_start)
+                    break
+
+            text_index = current_index + 1
+            pattern_index = 0
+            while_text_index = current_index + 1
+        else:
+            text_index += 1       
+            pattern_index = 0
+            while_text_index += 1
+
+    return index_list
 
 def test_string_algorithms(text, pattern):
     found = contains(text, pattern)
