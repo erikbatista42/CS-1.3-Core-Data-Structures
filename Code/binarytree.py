@@ -24,7 +24,8 @@ class BinaryTreeNode(object):
     def height(self):
         """Return the height of this node (the number of edges on the longest
         downward path from this node to a descendant leaf node).
-        TODO: Best and worst case running time: ??? under what conditions?"""
+        Best case running time: O(1) - there is only the root node.
+        worst case running time: O(n) - when you have to touch all the nodes."""
         left_height = right_height = 0
         # Check if left child has a value and if so calculate its height
         if self.left is not None:
