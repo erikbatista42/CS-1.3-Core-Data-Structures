@@ -1,29 +1,31 @@
 #!python
 
 def contains(text, pattern):
-    """Return a boolean indicating whether pattern occurs in text."""
+    """Return a boolean indicating whether pattern occurs in text.
+    Best case: O(1) - if pattern is empty
+    Worst case: O(n^2) - because that's how much find_all_indexes()"""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     if not pattern: return True # empty string
-       
-    # if len(pattern) == 1: 
-    #     if pattern in text: return True
-    #     else: return False
+        
+        # if len(pattern) == 1: 
+        #     if pattern in text: return True
+        #     else: return False
 
-    # pattern_index = 0
-    # for char in text:
-    #     if char == pattern[pattern_index]:
-    #         pattern_index += 1
-    #         if len(pattern) == pattern_index: return True
-    #     elif len(pattern) == 2: pattern_index = 0
-    #     else:
-    #         pattern_index = 0
-    #         pattern_index += 1
-    # return False
+        # pattern_index = 0
+        # for char in text:
+        #     if char == pattern[pattern_index]:
+        #         pattern_index += 1
+        #         if len(pattern) == pattern_index: return True
+        #     elif len(pattern) == 2: pattern_index = 0
+        #     else:
+        #         pattern_index = 0
+        #         pattern_index += 1
+        # return False
 
-    # refactored code
-    # O(text * pattern) time
-    # O(n) space - we append all items 
+        # refactored code
+        # O(text * pattern) time
+        # O(n) space - we append all items 
     if find_index(text, pattern) == None: 
         return False
     return True
@@ -35,6 +37,10 @@ def find_index(text, pattern):
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     if not pattern: return 0
+    '''
+    Best case: O(1) - if pattern is empty 
+    Worst case: O(n^2) - because that's how much find_all_indexes()
+    '''
     # text_index = 0
     # pattern_index = 0
     # for char in text:
@@ -58,15 +64,17 @@ def find_index(text, pattern):
     return None
 
 def find_all_indexes(text, pattern):
+    '''
+    Best case: O(n) - if pattern is empty, this means the whole text is a pattern so we generate every index
+    Worst case: O(n^2) - because for each character in text we look at each character in the pattern.
+   '''
     """Return a list of starting indexes of all occurrences of pattern in text,
     or an empty list if not found."""
     assert isinstance(text, str), 'text is not a string: {}'.format(text)
     assert isinstance(pattern, str), 'pattern is not a string: {}'.format(text)
     index_list = []
     if pattern == "":
-        for i in range(0, len(text)):
-            index_list.append(i) 
-        return index_list
+        return [x for x in range(len(text))] # index list 
     
     text_index = 0
     pattern_index = 0
