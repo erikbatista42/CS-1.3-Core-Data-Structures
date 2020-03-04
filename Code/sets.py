@@ -14,23 +14,30 @@ class Set():
         return 'Set({!r})'.format(self.table.items())
 
     def contains(self, value):
+        # Best: O(1) - if there's nothing in self.table.items(); nothing to iterate
+        # worst: O(n) - we have to iterate and check list n
         # return a boolean indicating whether element is in this set
         if value in self.table.items():
             return True
         return False
 
     def add(self, value):
+        # Best case: O(n) - because we call contains which we iterate over all vals in list or if it return false
+        # worst case: O(n^2) - The hash set resizes when calling set
         if self.contains(value) is False:
             self.table.set(value)
             self.size = self.table.size 
                  
     def remove(self, value):
+        # Best case: O(1) - we delete item instantly
+        # worst case: O(n) - The hash set resizes
         # remove element from this set, if present, or else raise KeyError
         self.table.delete(value)
         self.size = self.table.size
 
     # set operations on other sets
     def union(self, other_set):
+        # Best + worst case: O(n) - we iterate each item and add it to our self set.
         """other_set: set()
         Takes in a set and yields a set with all elements in both sets.
         Example: 
@@ -43,6 +50,10 @@ class Set():
         return self
     
     def intersection(self, other_set):
+        '''
+        Best + Worst case: O(n^2) - because we go through each item in self.elements which is a list, and we call self.contains which is also does linear search on a list, add operation is constant time.
+        '''
+        
         """other_set: takes in another set
         Takes in a set and yields a set with elements that are in both sets.
         Example: 
@@ -59,6 +70,9 @@ class Set():
         return new_set
     
     def difference(self, other_set):
+        '''
+        Best + Worst case: O(n^2) - because we go through each item in self.elements which is a list, and we call self.contains which is also does linear search on a list, add operation is constant time.
+        '''
         """
         Yields the difference betweens two sets. 
         or 
@@ -79,6 +93,9 @@ class Set():
         
     
     def is_subset(self, other_set):
+        '''
+        Best + Worst case: O(n^2) - because we go through each item in self.elements which is a list, and we call self.contains which is also does linear search on a list
+        '''
         # returns a bool on if all the self elements are contained in another set.
         for item in self.elements:
             if not self.contains(item):
