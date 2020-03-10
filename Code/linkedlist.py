@@ -113,17 +113,11 @@ class LinkedList(object):
 
         # if list is empty
         if self.size == 0:
-            self.head = new_node
-            self.tail = new_node
-            self.size += 1
+            self.append(item)
             return self.size
-        
-        # if list has 1 element
-        if self.size == 1:
-            self.head = new_node
-            self.head.next = self.tail
-            self.size += 1
-            return self.size
+        elif self.size == 1:
+            if index == 0: self.prepend(item)
+            return self.size 
 
         while current_node is not None:
             index_counter += 1

@@ -98,7 +98,7 @@ class Set():
         '''
         # returns a bool on if all the self elements are contained in another set.
         for item in self.elements:
-            if not self.contains(item):
+            if item not in other_set.elements:
                 return False
         return True
 

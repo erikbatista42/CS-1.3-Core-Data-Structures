@@ -30,14 +30,14 @@ class LinkedStack(object):
     def push(self, item):
         """Insert the given item on the top of this stack.
         Running time: O(1) – Why? [Appending to the back of the list is just moving a couple of pointers]"""
-        self.list.append(item)
+        self.list.prepend(item)
 
     def peek(self):
         """Return the item on the top of this stack without removing it,
         or None if this stack is empty."""
         if self.list.is_empty():
             return None
-        return self.list.tail.data
+        return self.list.head.data
 
     def pop(self):
         """Remove and return the item on the top of this stack,
@@ -47,9 +47,9 @@ class LinkedStack(object):
             raise ValueError("Err! Stack is empty! - There is nothing to pop.")
         # So we can return, and do somethign afterwards!
         try:
-            return self.list.tail.data
+            return self.list.head.data
         finally:
-            self.list.delete(self.list.tail.data)
+            self.list.delete(self.list.head.data)
 
 
 # Implement ArrayStack below, then change the assignment at the bottom
@@ -102,5 +102,5 @@ class ArrayStack(object):
 
 # Implement LinkedStack and ArrayStack above, then change the assignment below
 # to use each of your Stack implementations to verify they each pass all tests
-# Stack = LinkedStack
-Stack = ArrayStack
+Stack = LinkedStack
+# Stack = ArrayStack
